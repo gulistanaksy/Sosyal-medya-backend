@@ -1,0 +1,10 @@
+npm init -y
+npm install prisma --save-dev
+npx prisma // komutları görme
+
+npx prisma init // prisma/.env/.gitignore dosyalarını oluşturur.
+
+npm install @prisma/client --save    /// aradaki işlemleri yapar.
+npx prisma migrate dev --name init    /// database de modelleri oluşturdu.
+ npm install --save express
+ npm install --save-dev nodemon
