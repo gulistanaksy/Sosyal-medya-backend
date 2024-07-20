@@ -8,3 +8,8 @@ npm install @prisma/client --save    /// aradaki işlemleri yapar.
 npx prisma migrate dev --name init    /// database de modelleri oluşturdu.
  npm install --save express
  npm install --save-dev nodemon
+
+
+
+
+ npx prisma generate????
