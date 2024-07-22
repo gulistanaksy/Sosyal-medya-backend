@@ -9,6 +9,9 @@ npx prisma migrate dev --name init    /// database de modelleri oluşturdu.
  npm install --save express
  npm install --save-dev nodemon
 
+jwt
+npm install express jsonwebtoken bcryptjs
+
 
 
 

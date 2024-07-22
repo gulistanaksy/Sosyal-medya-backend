@@ -1,7 +1,11 @@
+const userCreate = require("./userCreate");
+const listAllUsers = require("./listAllUsers");
+const login=require("./login");
 
-const userCreate = require('./userCreate')
-class UserController{
-    userCreate= userCreate;
+class UserController {
+  userCreate = userCreate;
+  listAllUsers = listAllUsers;
+  login = login;
 }
 
-module.exports=UserController
+module.exports = UserController;
