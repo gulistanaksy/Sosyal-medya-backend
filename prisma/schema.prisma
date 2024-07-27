@@ -24,9 +24,98 @@ model Person {
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  email String @unique @db.VarChar(200)
-  fullName String @db.VarChar(250)
-  username String @unique @db.VarChar(200)
-  password String @db.VarChar(200)
+  id        Int      @id @default(autoincrement())
+  email     String   @unique @db.VarChar(200)
+  fullName  String   @db.VarChar(250)
+  username  String   @unique @db.VarChar(200)
+  password  String   @db.VarChar(200)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  profile   Profile? 
+  profileId Int?
 }
+
+model Profile {
+  id              Int      @id @default(autoincrement())
+  bio             String?
+  profilePicture  String?
+  isPrivate       Boolean  @default(false)
+  userId          Int      @unique
+  user            User     @relation(fields: [userId], references: [id])
+  posts           Post[]
+  // comments        Comment[]
+  // likes           Like[]
+  // notifications   Notification[]
+  //messagesSent    Message[] @relation("SentMessages", fields: [id], references: [senderId])
+  //messagesReceived Message[] @relation("ReceivedMessages", fields: [id], references: [receiverId])
+  // sentFriendRequests    FriendRequest[] @relation("SentFriendRequests")
+  // receivedFriendRequests FriendRequest[] @relation("ReceivedFriendRequests")
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  content   String
+  imageUrl  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  profileId Int
+  profile   Profile  @relation(fields: [profileId], references: [id])
+  // comments  Comment[]
+  // likes     Like[]
+}
+
+// model Comment {
+//   id        Int      @id @default(autoincrement())
+//   content   String
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   postId    Int
+//   post      Post     @relation(fields: [postId], references: [id])
+//   profileId Int
+//   profile   Profile  @relation(fields: [profileId], references: [id])
+// }
+
+// model Like {
+//   id        Int      @id @default(autoincrement())
+//   createdAt DateTime @default(now())
+//   profileId Int
+//   profile   Profile  @relation(fields: [profileId], references: [id])
+//   postId    Int
+//   post      Post     @relation(fields: [postId], references: [id])
+// }
+
+// model FriendRequest {
+//   id        Int      @id @default(autoincrement())
+//   createdAt DateTime @default(now())
+//   senderId  Int
+//   receiverId Int
+//   status    FriendRequestStatus @default(PENDING)
+//   sender    Profile  @relation("SentFriendRequests", fields: [senderId], references: [id])
+//   receiver  Profile  @relation("ReceivedFriendRequests", fields: [receiverId], references: [id])
+// }
+
+// model Notification {
+//   id        Int      @id @default(autoincrement())
+//   content   String
+//   createdAt DateTime @default(now())
+//   read      Boolean  @default(false)
+//   profileId Int
+//   profile   Profile  @relation(fields: [profileId], references: [id])
+// }
+
+// // model Message {
+// //   id        Int      @id @default(autoincrement())
+// //   content   String
+// //   createdAt DateTime @default(now())
+// //   senderId  Int
+// //   receiverId Int
+// //   sender    Profile  @relation("SentMessages", fields: [senderId], references: [id])
+// //   receiver  Profile  @relation("ReceivedMessages", fields: [receiverId], references: [id])
+// // }
+
+
+// enum FriendRequestStatus {
+//   PENDING      // beklemede
+//   ACCEPTED
+//   DECLINED
+// }

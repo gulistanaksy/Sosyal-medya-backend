@@ -4,6 +4,9 @@ const userController = new UserController();
 //import personRouter from './personRouter'
 const personRouter = require("./personRouter");
 const userRouter = require("./userRouter");
+const profileRouter = require("./profileRouter");
+const postRouter = require("./postRouter");
+
 const login = require("../controllers/userController/login");
 const router = express.Router();
 const JWT_SECRET = "merhabaNodejs";
@@ -51,6 +54,8 @@ router.get("/", (req, res) => {
 });
 router.use("/person/", personRouter);
 router.use("/user/", userRouter);
+router.use("/profile/", profileRouter);
+router.use("/post",postRouter)
 
 //export default router ;
 module.exports = router;

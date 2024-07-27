@@ -12,3 +12,4 @@ RUN npm install
 
 # Command to run the application
 CMD ["bash", "entrypoint.sh"]
+
