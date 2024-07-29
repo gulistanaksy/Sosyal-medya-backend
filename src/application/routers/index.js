@@ -6,8 +6,8 @@ const personRouter = require("./personRouter");
 const userRouter = require("./userRouter");
 const profileRouter = require("./profileRouter");
 const postRouter = require("./postRouter");
+const decryptToken = require("../../../core/utils/token")
 
-const login = require("../controllers/userController/login");
 const router = express.Router();
 const JWT_SECRET = "merhabaNodejs";
 const jwt = require("jsonwebtoken");
@@ -26,11 +26,7 @@ router.use(async (req, res, next) => {
   }
 
   try {
-    console.log("token açma");
-    console.log(token);
-    const decoded = jwt.verify(token, JWT_SECRET);
-    console.log("decoded", decoded);
-    req.userId = decoded.userId; // Token içindeki kullanıcı ID'sini req nesnesine ekle
+    req.userId =await decryptToken(token); // Token içindeki kullanıcı ID'sini req nesnesine ekle
     console.log(req.userId);
     // Kullanıcının veritabanında mevcut olup olmadığını kontrol et
 
