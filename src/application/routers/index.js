@@ -1,23 +1,25 @@
 const express = require("express");
-const UserController = require("../controllers/userController");
-const userController = new UserController();
-//import personRouter from './personRouter'
-const personRouter = require("./personRouter");
-const userRouter = require("./userRouter");
-const profileRouter = require("./profileRouter");
-const postRouter = require("./postRouter");
-const decryptToken = require("../../../core/utils/token")
-
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 const router = express.Router();
 const JWT_SECRET = "merhabaNodejs";
 const jwt = require("jsonwebtoken");
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+
+const UserController = require("../controllers/userController");
+const userController = new UserController();
+
+const userRouter = require("./userRouter");
+const profileRouter = require("./profileRouter");
+const postRouter = require("./postRouter");
+const commentRouter = require("./commentRouter");
+const likeRouter = require("./likeRouter");
+
+const decryptToken = require("../../../core/utils/token")
+
 
 router.post("/register", userController.userCreate);
 router.post("/login", userController.login);
 
-//const isPasswordValid = await bcrypt.compare(password, user.password);
 router.use(async (req, res, next) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
 
@@ -48,10 +50,12 @@ router.use(async (req, res, next) => {
 router.get("/", (req, res) => {
   res.send("merhaba");
 });
-router.use("/person/", personRouter);
+
 router.use("/user/", userRouter);
 router.use("/profile/", profileRouter);
-router.use("/post",postRouter)
+router.use("/post",postRouter);
+router.use("/comment",commentRouter);
+router.use("/like", likeRouter);
 
-//export default router ;
+
 module.exports = router;

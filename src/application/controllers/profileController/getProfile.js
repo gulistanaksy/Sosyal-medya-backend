@@ -16,7 +16,8 @@ const getProfile = async (req, res) => {
         profilePicture:true,
         isPrivate:true,
         userId:true,
-        user:true
+        user:true,
+        posts:true
       },
     });
     res.status(200).json(profile);
