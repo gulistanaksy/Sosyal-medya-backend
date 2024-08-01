@@ -6,3 +6,6 @@ id özel user bilgisi getir. profile bilgilerinide döndürebilirsin.
 postu getirirken beğeni sayısını gönder.
 kişi kendi profilinde tüm postlarını görmeli
 kişi anasayfasında takip ettiği kişilerin postlarını görmeli
+
+
+post yorumlarına güncelleme ekle

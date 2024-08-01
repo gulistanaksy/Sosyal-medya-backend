@@ -66,7 +66,15 @@ const getPost = async (req, res) => {
       return res.status(404).json({ error: "Post bulunamadı." });
     }
 
-    res.status(200).json( post );
+    // Beğeni ve yorum sayısını hesapla
+    const commentsCount = post.comments.length;
+    const likesCount = post.likes.length;
+
+    res.status(200).json( {
+      ...post,
+      commentsCount,
+      likesCount,
+    } );
   } catch (error) {
     console.error("Hata:", error);
     res.status(500).json({ error: "Bir hata gerçekleşti." });
