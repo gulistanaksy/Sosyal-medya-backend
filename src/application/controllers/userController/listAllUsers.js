@@ -9,6 +9,7 @@ const listAllUsers = async (req, res) => {
         username: true,
         fullName: true,
         password: true,
+        profileId:true
       },
     });
     res.status(200).json(r);

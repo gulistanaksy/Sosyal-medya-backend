@@ -13,6 +13,7 @@ const profileRouter = require("./profileRouter");
 const postRouter = require("./postRouter");
 const commentRouter = require("./commentRouter");
 const likeRouter = require("./likeRouter");
+const followRequestRouter= require("./followRequestRouter");
 
 const decryptToken = require("../../../core/utils/token")
 
@@ -56,6 +57,7 @@ router.use("/profile/", profileRouter);
 router.use("/post",postRouter);
 router.use("/comment",commentRouter);
 router.use("/like", likeRouter);
+router.use("/followRequest", followRequestRouter);
 
 
 module.exports = router;

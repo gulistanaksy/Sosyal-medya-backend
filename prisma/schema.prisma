@@ -35,14 +35,15 @@ model Profile {
   posts           Post[]
   comments        Comment[]
   likes           Like[]
+  
+  // Follow requests
+  sentFollowRequests     FollowRequest[] @relation("SentFollowRequests")
+  receivedFollowRequests FollowRequest[] @relation("ReceivedFollowRequests")
 
   // Follow relationships
   following       Follow[] @relation("following")
   followers       Follow[] @relation("follower")
 
-  // Follow requests
-  sentFollowRequests     FollowRequest[] @relation("SentFollowRequests")
-  receivedFollowRequests FollowRequest[] @relation("ReceivedFollowRequests")
 
   // notifications   Notification[]
   //messagesSent    Message[] @relation("SentMessages", fields: [id], references: [senderId])
@@ -86,8 +87,8 @@ model Like {
 
 model FollowRequest {
   id         Int      @id @default(autoincrement())
-  senderId   Int
-  receiverId Int
+  senderId   Int     // istek atan
+  receiverId Int     // istek alan
   status     FollowRequestStatus @default(PENDING)
   createdAt  DateTime @default(now())
 
@@ -99,8 +100,8 @@ model FollowRequest {
 
 model Follow {
   id         Int      @id @default(autoincrement())
-  followerId Int
-  followingId Int
+  followerId Int        // takip eden
+  followingId Int       // takip edilen
   createdAt  DateTime @default(now())
 
   follower   Profile  @relation("follower", fields: [followerId], references: [id])
