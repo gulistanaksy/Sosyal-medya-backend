@@ -2,6 +2,9 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const decryptToken = require("../../../../core/utils/token");
 
+
+
+// kişinin profilindeki postları getirmesi için.
 const getPost = async (req, res) => {
   try {
     const token = req.header("Authorization")?.replace("Bearer ", "");
@@ -37,13 +40,33 @@ const getPost = async (req, res) => {
         profileId: profile.id,
         id: Number(postId),
       },
+      select:{
+        id:true,
+        content:true,
+        imageUrl:true,
+        profileId:true,
+        createdAt:true,
+        comments:{
+          select:{
+            content:true,
+            postId:true,
+            profileId:true
+          }
+        },
+        likes:{
+          select:{
+            profileId:true,
+            postId:true
+          }
+        }
+      }
     });
 
     if (!post) {
       return res.status(404).json({ error: "Post bulunamadı." });
     }
 
-    res.status(200).json({ post });
+    res.status(200).json( post );
   } catch (error) {
     console.error("Hata:", error);
     res.status(500).json({ error: "Bir hata gerçekleşti." });

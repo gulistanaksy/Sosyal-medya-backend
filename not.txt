@@ -18,3 +18,6 @@ npm install express jsonwebtoken bcryptjs
  npx prisma generate????
 
  authorId: JSON.parse(decryptToken(key)).id,
+
+
+ include ve select aynı anda kullanılmaz

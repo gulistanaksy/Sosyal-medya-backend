@@ -1,10 +1,10 @@
 const userCreate = require("./userCreate");
-const listAllUsers = require("./listAllUsers");
+const getUser = require("./getUser");
 const login=require("./login");
 
 class UserController {
   userCreate = userCreate;
-  listAllUsers = listAllUsers;
+  getUser = getUser;
   login = login;
 }
 

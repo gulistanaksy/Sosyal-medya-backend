@@ -28,6 +28,13 @@ const userCreate = async (req, res) => {
       expiresIn: "1h",
     });
 
+    // user oluşunca profile oluşturma.
+    const newProfile = await prisma.profile.create({
+      data: {
+        userId:newUser.id
+      },
+    });
+
     res.status(201).json({ token });
   } catch (error) {
     console.log("e", error);

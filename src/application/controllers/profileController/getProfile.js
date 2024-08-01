@@ -8,7 +8,7 @@ const getProfile = async (req, res) => {
     const userId = await decryptToken(token)
     const profile = await prisma.profile.findUnique({
       where: {
-        id: Number(userId), // ID'nin integer olduğundan emin olun
+        userId: Number(userId), // ID'nin integer olduğundan emin olun
       },
       select: {
         id: true,
@@ -16,7 +16,14 @@ const getProfile = async (req, res) => {
         profilePicture:true,
         isPrivate:true,
         userId:true,
-        user:true,
+        user:{
+          select:{
+            id:true,
+            username:true,
+            fullName:true,
+            email:true,
+          }
+        },
         posts:true
       },
     });
